@@ -29,7 +29,7 @@ const routes = [{
   {
     path: '/advideo',
     name: 'advideo',
-    component: () => import('../views/advideo.vue')
+    component: () => import('../views/advideo.vue'),
   },
   {
     path: '/404',

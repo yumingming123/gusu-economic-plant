@@ -90,7 +90,7 @@ export default {
       } else if (item.name == "企业服务") {
         window.location.href = item.path;
       } else {
-        console.log(this.$route.path);
+        // console.log(this.$route.path);
         if (this.$route.path != item.path) {
           this.$router.push(item.path);
         }

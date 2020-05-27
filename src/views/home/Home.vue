@@ -26,7 +26,8 @@
           </h1>
           <h2>全天候为您服务</h2>
         </div>
-        <a v-if="showAd" @click="dd" class="banner-ad" href="/economicAd">
+        <!-- <a v-show="showAd" @click="$router.push('/economicAd')" class="banner-ad"> -->
+        <a v-show="showAd" @click="enterBannerAd" class="banner-ad">
           <img class="banner-ad-img" src="@/assets/img/home/banner-p-1.jpg" alt />
           <img
             @click.stop="showAd = false"
@@ -42,8 +43,8 @@
           </div>
           <div class="banner-bottom-c">
             <div class="banner-b-c-t">
-              <input type="text" placeholder="请输入载体名称..." />
-              <img src="@/assets/img/home/search.svg" alt />
+              <input type="text" placeholder="请输入载体名称..." v-model="searchPort" />
+              <img src="@/assets/img/home/search.svg" @click="searchZT" alt />
             </div>
             <div class="banner-b-c-b">
               <a
@@ -73,7 +74,7 @@
             平方公里的苏州古城全部，常住人口约100万。保护区是全国首个也是唯一一个国家历
             史文化名城保护区。
           </p>
-          <a href="/about">更多&emsp;&gt;&gt;</a>
+          <a @click="$router.push('/about')">更多&emsp;&gt;&gt;</a>
         </div>
       </div>
     </div>
@@ -150,7 +151,8 @@ export default {
       isOver: true,
       timer: null,
       count: 0,
-      autoTimer: null
+      autoTimer: null,
+      searchPort: '',
     };
   },
   methods: {
@@ -203,7 +205,7 @@ export default {
         }
         this.$refs.swi.style.left = start + step + "px";
         if (start + step == target) {
-          console.log("stop...");
+          // console.log("stop...");
           this.isOver = true;
           clearInterval(this.timer);
         }
@@ -216,11 +218,23 @@ export default {
     },
     enterBox() {
       clearInterval(this.autoTimer);
-      console.log("鼠标进入盒子了");
+      // console.log("鼠标进入盒子了");
     },
     leaveBox() {
       this.autoPlay();
-      console.log("鼠标离开盒子了");
+      // console.log("鼠标离开盒子了");
+    },
+    enterBannerAd(){
+      const obj = this.$router.resolve({   // 通过resolve可以得到href  location  route等信息
+        path: '/economicAd',
+      })
+      // console.log(obj)
+      window.open(obj.href, '_blank')
+      // window.open('#/economicAd', '_blank')  // 也能完成路由跳转  
+    },
+    searchZT(){
+      const url = 'http://gszs.gusu.gov.cn/maps/index.html?keyword=' + this.searchPort;
+      window.open(url, '_blank');
     }
   },
   mounted() {
@@ -229,6 +243,9 @@ export default {
       // console.log(this.$refs.swiItem[0].offsetWidth)
       this.autoPlay();
     });
+  },
+  beforeDestroy() {
+    clearInterval(this.autoTimer)
   },
   created() {}
 };
@@ -307,13 +324,14 @@ a {
         }
       }
       > .banner-ad {
-        position: absolute;
-        top: 80px;
+        position: fixed;
+        top: 160px;
         right: 60px;
         display: block;
         width: 225px;
         height: 150px;
         z-index: 10;
+        cursor: pointer;
         > .banner-ad-img {
           width: 100%;
           height: 100%;
@@ -370,14 +388,15 @@ a {
             background-color: #fff;
             > input {
               height: 21px;
-              width: 540px;
+              width: 535px;
               padding: 0;
               border: none;
               outline: none;
             }
             img {
               height: 20px;
-              width: 20px;
+              width: 25px;
+              cursor: pointer;
             }
           }
           .banner-b-c-b {
@@ -442,6 +461,7 @@ a {
         }
         > a {
           color: #353535;
+          cursor: pointer;
         }
       }
     }

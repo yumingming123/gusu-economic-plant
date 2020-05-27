@@ -2,7 +2,7 @@
   <div class="advideo">
     <ul>
       <li v-for="item in list" :key="item.title">
-        <img :src="item.path" alt="">
+        <img :src="item.path" alt="" @click="seeVideo(item.video)">
         <p>{{item.title}}</p>
       </li>
     </ul>
@@ -26,52 +26,66 @@ export default {
         {
           path: require('@/assets/img/video/video-1.png'),
           title: '姑苏招商（2017版）',
+          video: '112017xcp.mp4',
         },
         {
           path: require('@/assets/img/video/video-2.png'),
           title: '姑苏招商（2012版）',
+          video: '5ymgs.mp4',
         },
         {
           path: require('@/assets/img/video/video-2.png'),
           title: '姑苏招商（2012版英文版）',
+          video: '4ymgs-en.mp4',
         },{
           path: require('@/assets/img/video/video-4.png'),
           title: '苏州姑苏（飞越姑苏）',
+          video: '6fygs.mp4',
         },
         {
           path: require('@/assets/img/video/video-5.png'),
           title: '苏州城市（美丽苏州）',
+          video: '2szxxp.mp4',
         },
         {
           path: require('@/assets/img/video/video-6.png'),
           title: '苏州城市（双面绣）',
+          video: '1smf.mp4',
         },
         {
           path: require('@/assets/img/video/video-7.png'),
           title: '桃花坞项目',
+          video: '9thw.mp4',
         },
         {
           path: require('@/assets/img/video/video-8.png'),
           title: '渔家村项目',
+          video: '10yjc.mp4',
         },
         {
           path: require('@/assets/img/video/video-9.png'),
           title: '虎丘综改项目',
+          video: '7hqzg.mp4',
         },
         {
           path: require('@/assets/img/video/video-10.png'),
           title: '姑苏软件园项目',
+          video: '3gsrjy.mp4',
         },
         {
           path: require('@/assets/img/video/video-11.png'),
           title: '虎丘婚纱城项目',
+          video: '8hsc.mp4',
         }
       ]
     }
   },
 
   methods: {
-
+    seeVideo(val){
+      const url = 'http://gszs.gusu.gov.cn/maps/video/' + val;
+      window.open(url, '_blank')
+    }
   },
   created() {
 
@@ -97,6 +111,7 @@ export default {
         display: block;
         width: 234px;
         height: 175px;
+        cursor: pointer;
       }
       p {
         margin: 10px 0 14px;
@@ -113,6 +128,7 @@ export default {
   }
   .pageLine {
     margin: 30px 0 60px;
+    cursor: default;
     span {
       display: inline-block;
       width: 52px;

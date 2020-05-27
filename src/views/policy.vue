@@ -16,7 +16,7 @@ export default {
 
   methods: {},
   created() {
-    console.log(this.$refs.iframe);
+    // console.log(this.$refs.iframe);
   }
 };
 </script>
